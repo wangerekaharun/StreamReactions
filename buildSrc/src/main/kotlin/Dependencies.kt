@@ -1,6 +1,6 @@
 object Versions {
 
-    //Version codes for all the libraries
+    // Androidx
     const val kotlin = "1.4.21"
     const val buildToolsVersion = "4.1.1"
     const val appCompat = "1.3.0-rc01"
