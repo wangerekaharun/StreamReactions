@@ -4,7 +4,7 @@ plugins {
     id(BuildPlugins.kotlinParcelizePlugin)
     id(BuildPlugins.ktlintPlugin)
     id(BuildPlugins.jacocoAndroid)
-    id("kotlin-android")
+    id(BuildPlugins.kapt)
 }
 
 jacoco {
@@ -14,11 +14,6 @@ jacoco {
 android {
 
     compileSdkVersion(AndroidSdk.compileSdkVersion)
-    buildToolsVersion("30.0.2")
-
-    android.buildFeatures.dataBinding = true
-    android.buildFeatures.viewBinding = true
-
     defaultConfig {
         applicationId = "ke.co.appslab.gradleplugins"
         minSdkVersion(AndroidSdk.minSdkVersion)
@@ -47,9 +42,18 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
+    val TOKEN: String? =
+            com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)
+                    .getProperty("TOKEN")
+
     buildTypes {
+        this.forEach {
+            it.buildConfigField("String", "TOKEN", TOKEN.toString())
+        }
+
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -73,9 +77,4 @@ android {
 
         testImplementation(TestLibraries.junit4)
     }
-}
-dependencies {
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 }
