@@ -21,6 +21,9 @@ object Versions {
     const val dokka = "1.4.32"
     const val gradleVersionsPlugin = "0.38.0"
     const val jacoco = "0.8.4"
+
+    // Stream
+    const val stream = "4.8.0"
 }
 
 object BuildPlugins {
@@ -45,6 +48,9 @@ object Libraries {
         "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val materialComponents = "com.google.android.material:material:${Versions.material}"
+
+    // Stream
+    const val stream = "io.getstream:stream-chat-android-ui-components:${Versions.stream}"
 }
 
 object TestLibraries {
