@@ -4,6 +4,7 @@ plugins {
     id(BuildPlugins.kotlinParcelizePlugin)
     id(BuildPlugins.ktlintPlugin)
     id(BuildPlugins.jacocoAndroid)
+    id("kotlin-android")
 }
 
 jacoco {
@@ -72,4 +73,9 @@ android {
 
         testImplementation(TestLibraries.junit4)
     }
+}
+dependencies {
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 }

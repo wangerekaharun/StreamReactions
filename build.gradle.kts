@@ -34,6 +34,7 @@ allprojects {
 buildscript {
     val kotlinVersion by extra("1.4.10")
     val jacocoVersion by extra("0.2")
+    val kotlin_version by extra("1.4.32")
 
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
