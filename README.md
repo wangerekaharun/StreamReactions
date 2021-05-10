@@ -153,6 +153,10 @@ The code is similar to the one for adding a like reaction that you saw above.
 
 ## Paginating Reactions
 
+## Customizing the Reactions UI
+
+
+
 ## Conclusion
 
 You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. 

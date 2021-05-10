@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.stream.reactions.databinding.ActivityReactionsBinding
 import io.getstream.chat.android.client.ChatClient
@@ -11,16 +14,18 @@ import io.getstream.chat.android.client.api.models.QueryChannelsRequest
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.models.*
+import io.getstream.chat.android.core.internal.exhaustive
 import io.getstream.chat.android.livedata.ChatDomain
 
 class ReactionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReactionsBinding
     private var sentMessage = Message()
-    private val reactionsAdapter = ReactionsAdapter { reactionModel ->
-        onReactionClick(reactionModel)
-    }
     private lateinit var channelClient: ChannelClient
+    private val reactionsAdapter = ReactionsAdapter {
+
+    }
+    private val reactionViewModel: ReactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,66 +97,33 @@ class ReactionsActivity : AppCompatActivity() {
             }
         }
 
-
-    }
-
-    private fun showReactions() {
-        binding.rvReactions.visibility = View.VISIBLE
-        reactionsAdapter.submitList(getReactions())
-        binding.rvReactions.adapter = reactionsAdapter
-
-    }
-
-    private fun hideReactions(sentReaction: Reaction) {
-        binding.rvReactions.visibility = View.GONE
-        binding.layoutReactionCount.visibility = View.VISIBLE
-        if (sentReaction.type == "clap"){
-            binding.imgReactionCount.setImageResource(R.drawable.ic_clapping)
-        } else {
-            binding.imgReactionCount.setImageResource(R.drawable.ic_baseline_favorite_24)
-        }
-        binding.tvReactionCount.text = sentReaction.score.toString()
-        binding.imgDeleteReaction.setOnClickListener {
-            deleteReaction(sentReaction)
-        }
-    }
-
-    private fun onReactionClick(reactionModel: ReactionModel){
-        val reaction = Reaction(
-            messageId = sentMessage.id,
-            type = reactionModel.name,
-            score = reactionModel.score,
-            extraData = mutableMapOf("customField" to 1),
-        )
-
-        if (reactionModel.name == "like"){
-            likeReaction(reaction)
-        }
-
-        if (reactionModel.name == "clap"){
-            clapReaction(reaction)
-        }
-
-    }
-
-    private fun likeReaction(reaction: Reaction) {
-        channelClient.sendReaction(reaction).enqueue { result ->
-            if (result.isSuccess) {
-                val sentReaction = result.data()
-                hideReactions(sentReaction)
-            } else {
-                showSnackBar("Adding like reaction Failed")
+        reactionViewModel.messageId.observe(this){ messagId ->
+            if (messagId != null){
+                getReactions(messagId)
             }
         }
     }
 
-    private fun clapReaction(reaction: Reaction) {
-        channelClient.sendReaction(reaction).enqueue { result->
+
+    private fun showReactions() {
+        val modalbottomSheetFragment = ReactionsBottomSheet(channelClient, sentMessage)
+        modalbottomSheetFragment.show(supportFragmentManager,modalbottomSheetFragment.tag)
+    }
+
+    private fun getReactions(messageId: String) {
+        channelClient.getReactions(
+            messageId = messageId,
+            offset = 0,
+            limit = 10,
+        ).enqueue { result ->
             if (result.isSuccess) {
-                val sentReaction = result.data()
-                hideReactions(sentReaction)
+                val reactions: List<Reaction> = result.data()
+                binding.rvReactions.visibility = View.VISIBLE
+                reactionsAdapter.submitList(reactions)
+                binding.rvReactions.adapter = reactionsAdapter
             } else {
-                showSnackBar("Adding clap reaction Failed")
+                showSnackBar("Getting Reactions Failed: ${result.error().message}")
+                Log.d("error",result.error().message.toString())
             }
         }
     }
@@ -174,12 +146,6 @@ class ReactionsActivity : AppCompatActivity() {
         binding.layoutReactionCount.visibility = View.GONE
         showSnackBar("Reaction deleted")
     }
-
-
-    private fun getReactions() = listOf(
-        ReactionModel("like",R.drawable.ic_baseline_favorite_border_24, 10),
-        ReactionModel("clap",R.drawable.ic_clapping, 25)
-    )
 
     private fun showSnackBar(message: String){
         Snackbar.make(
