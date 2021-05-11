@@ -1,5 +1,6 @@
 package com.stream.reactions
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class ReactionsActivity : AppCompatActivity() {
 
     }
     private val reactionViewModel: ReactionViewModel by viewModels()
+    private var channelId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +60,7 @@ class ReactionsActivity : AppCompatActivity() {
         channelClient.create().enqueue { result ->
             if (result.isSuccess) {
                 val newChannel: Channel = result.data()
+                channelId = newChannel.cid
                 Log.d("Channel",newChannel.name)
             } else {
                 showSnackBar("Adding channels Failed")
@@ -80,7 +83,7 @@ class ReactionsActivity : AppCompatActivity() {
         client.queryChannels(request).enqueue { result ->
             if (result.isSuccess) {
                 val channels: List<Channel> = result.data()
-                Log.d("Channel",channels.size.toString())
+                Log.d("Channel",channels.toString())
             } else {
                 showSnackBar("Querying channel Failed")
             }
@@ -101,6 +104,12 @@ class ReactionsActivity : AppCompatActivity() {
             if (messagId != null){
                 getReactions(messagId)
             }
+        }
+
+        binding.btnChannelMessages.setOnClickListener {
+            val intent = Intent(this, ChannelMessagesActivity::class.java)
+            intent.putExtra("channelId",channelId)
+            startActivity(intent)
         }
     }
 

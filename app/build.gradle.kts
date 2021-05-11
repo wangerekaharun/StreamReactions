@@ -71,10 +71,12 @@ android {
         //Stream
         implementation(Libraries.stream)
 
+        //Fragment
+        implementation(Libraries.fragment)
+
         androidTestImplementation(TestLibraries.testRunner)
         androidTestImplementation(TestLibraries.espresso)
         androidTestImplementation(TestLibraries.annotation)
-
         testImplementation(TestLibraries.junit4)
     }
 }

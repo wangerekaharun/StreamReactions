@@ -23,7 +23,10 @@ object Versions {
     const val jacoco = "0.8.4"
 
     // Stream
-    const val stream = "4.8.0"
+    const val stream = "4.9.2"
+
+    // Fragment
+    const val fragment = "1.3.3"
 }
 
 object BuildPlugins {
@@ -51,6 +54,9 @@ object Libraries {
 
     // Stream
     const val stream = "io.getstream:stream-chat-android-ui-components:${Versions.stream}"
+
+    // Fragment
+    const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
 }
 
 object TestLibraries {

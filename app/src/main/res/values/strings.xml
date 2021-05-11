@@ -9,4 +9,5 @@
   <string name="text_like_label">Like</string>
   <string name="text_clap_label">Clap</string>
   <string name="text_save_reaction">Save Reaction</string>
+    <string name="text_go_to_channel">View Channel</string>
 </resources>
