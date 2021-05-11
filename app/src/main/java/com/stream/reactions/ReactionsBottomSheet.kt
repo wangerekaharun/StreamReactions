@@ -20,12 +20,6 @@ class ReactionsBottomSheet(private val channelClient: ChannelClient, private val
     private var reactionType = ""
     private val reactionViewModel: ReactionViewModel by activityViewModels()
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

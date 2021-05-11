@@ -3,19 +3,14 @@ plugins {
     id(BuildPlugins.kotlinAndroid)
     id(BuildPlugins.kotlinParcelizePlugin)
     id(BuildPlugins.ktlintPlugin)
-    id(BuildPlugins.jacocoAndroid)
     id(BuildPlugins.kapt)
-}
-
-jacoco {
-    toolVersion = Versions.jacoco
 }
 
 android {
 
     compileSdkVersion(AndroidSdk.compileSdkVersion)
     defaultConfig {
-        applicationId = "ke.co.appslab.gradleplugins"
+        applicationId = "com.stream.reactions"
         minSdkVersion(AndroidSdk.minSdkVersion)
         targetSdkVersion(AndroidSdk.targetSdkVersion)
         versionCode = AndroidSdk.versionCode
