@@ -23,8 +23,8 @@ class ReactionsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReactionsBinding
     private var sentMessage = Message()
     private lateinit var channelClient: ChannelClient
-    private val reactionsAdapter = ReactionsAdapter {
-
+    private val reactionsAdapter = ReactionsAdapter { reaction ->
+        deleteReaction(reaction)
     }
     private val reactionViewModel: ReactionViewModel by viewModels()
     private var channelId = ""
@@ -142,7 +142,7 @@ class ReactionsActivity : AppCompatActivity() {
             reactionType = reaction.type,
         ).enqueue { result ->
             if (result.isSuccess) {
-                hideReactionCount()
+                Log.d("Reaction Deleted","Reaction ${reaction.type} has been deleted")
             } else {
                 showSnackBar("Delete Failed")
             }
@@ -150,10 +150,6 @@ class ReactionsActivity : AppCompatActivity() {
 
     }
 
-    private fun hideReactionCount() {
-        binding.layoutReactionCount.visibility = View.GONE
-        showSnackBar("Reaction deleted")
-    }
 
     private fun showSnackBar(message: String){
         Snackbar.make(
