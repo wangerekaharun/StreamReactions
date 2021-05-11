@@ -21,7 +21,7 @@ In this tutorial you're going to learn how to:
 
 ## Adding a Reaction
 
-![Test Image](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions.png)
+![Stream Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions.png)
 
 Reactions are mostly found on most social media apps and there's a number of them which are famously known:
 
@@ -34,17 +34,18 @@ They're mostly used to represent common quick reactions that users can have afte
 
 You'll be seeing how to add a reaction. This is how the app looks like:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/first_run.png" alt="first_run" style="zoom:50%;" />
+![](https://github.com/wangerekaharun/StreamReactions/blob/master/images/first_run.png)
+
 
 The app has a sample message <code>TextView</code> which has a favourite <code>ImageButton</code> just beside it and a <code>VIEW CHANNEL</code> Button.  You'll see the channel functionalities later on in this tutorial.
 
 When you tap on the favourite <code>ImageButton</code> a <code>BottomSheet</code> modal appears as show in the image below:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/add_reaction.png" alt="add_reaction" style="zoom:50%;" />
+![Add Reaction](https://github.com/wangerekaharun/StreamReactions/blob/master/images/add_reaction.png)
 
 This is the UI for adding your reaction. With buttons for selecting the reaction type and other butons for adding the score for your reaction. Once you set everything it should be as follows:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/reactions_input.png" alt="reactions_input" style="zoom:50%;" />
+![Reactions Input](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions_input.png)
 
 
 
@@ -121,7 +122,9 @@ Here, you send your reaction object to Stream Client and wait for the callback r
 
   
 
-  <img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/saved_reactions.png" alt="saved_reactions" style="zoom:50%;" />
+  ![Saved Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/saved_reactions.png)
+
+  
 
 Congratulations! You've just learned how to add your first message reaction. With the Stream SDK it's very easy and seemless way to do that. Next, you'll be seeing how to remove the reaction.
 
@@ -205,9 +208,7 @@ The <code>getReactions()</code> method takes in three parameters:
 
 From the sample project, here's how the reactions are:
 
-![paginated_reactions](/Users/harun/AndroidStudioProjects/StreamReactions/images/paginated_reactions.png)
-
-
+![Paginated Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/paginated_reactions.png)
 
 The API offers alot of flebility according to your needs. In the next section you'll be looking and the reactions from the API itself and how you can customize them.
 
@@ -215,7 +216,7 @@ The API offers alot of flebility according to your needs. In the next section yo
 
 The Reactions API has the UI components for reactions already built for you incase you don't need custom ones as you've been learning in the sections above. This is how they look:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/inbuilt_reactions.png" alt="inbuilt_reactions" style="zoom:50%;" />
+![Inbuilt Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/inbuilt_reactions.png)
 
 The UI offers a couple of commons reactions like the like love, thumbs up and so on which makes it easier if you want to quickly adopt them and use them in your app.
 
@@ -270,7 +271,7 @@ ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
 
 Here you're passing your reactions to the SDK. And now this is how your reactions look like:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/custom_reactions.png" alt="custom_reactions" style="zoom:50%;" />
+![Custom Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/custom_reactions.png)
 
 Wohoo! As you can now see, all the reactions are custom ones and with different colors!. And as you've noted, it's very easy to achieve this is easy steps. 
 
@@ -296,9 +297,9 @@ From the above attributes you can see you can see you can be able to change:
 - Style
 - Card Background.
 
-This is how th final results looks like:
+This is how the final results looks like:
 
-<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/reactions_custom_style.png" alt="reactions_custom_style" style="zoom:50%;" />
+![Custom Style Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions_custom_style.png)
 
 Albeit yours will be different depending on your app colors and styling requirements.
 
