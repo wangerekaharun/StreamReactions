@@ -23,7 +23,7 @@ In this tutorial you're going to learn how to:
 
 ![Stream Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions.png)
 
-Reactions are mostly found on most social media apps and there's a number of them which are famously known:
+Reactions are mostly found on most social media apps and there's a number of them that are famously known:
 
 - Like
 - Favourite/Love
@@ -43,7 +43,7 @@ When you tap on the favourite <code>ImageButton</code> a <code>BottomSheet</code
 
 ![Add Reaction](https://github.com/wangerekaharun/StreamReactions/blob/master/images/add_reaction.png)
 
-This is the UI for adding your reaction. With buttons for selecting the reaction type and other butons for adding the score for your reaction. Once you set everything it should be as follows:
+This is the UI for adding your reaction. With buttons for selecting the reaction type and other buttons for adding the score for your reaction. Once you set everything it should be as follows:
 
 ![Reactions Input](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions_input.png)
 
@@ -74,7 +74,7 @@ To send a message reaction, you need a <code>ChannelClient</code>. A <code>Chann
 - Create Channels
 - Add users to channels
 - Add messages to channels
-- React to messages in out client.
+- React to messages in channels.
 
 On the sample app, the client is declared at the top of the file as:
 
@@ -126,7 +126,7 @@ Here, you send your reaction object to Stream Client and wait for the callback r
 
   
 
-Congratulations! You've just learned how to add your first message reaction. With the Stream SDK it's very easy and seemless way to do that. Next, you'll be seeing how to remove the reaction.
+Congratulations! You've just learned how to add your first message reaction. With the Stream SDK, it's a very easy and seamless way to do that. Next, you'll be seeing how to remove the reaction.
 
 ## Removing a Reaction
 
@@ -179,7 +179,7 @@ The code is similar to the one for adding a  reaction that you saw above.
 
 ## Paginating Reactions
 
-On Social apps, a message or a post can get more that 10 reactions and even at times thousands of reactions. In such cases you can not display all these reactions in your app. Reactions API allows you to paginate reactions as you fetch them. In this way, you specify the number that you want to fetch according to the UI of your app.
+On Social apps, a message or a post can get more than 10 reactions and even at times thousands of reactions. In such cases, you can not display all these reactions in your app. Reactions API allows you to paginate reactions as you fetch them. In this way, you specify the number that you want to fetch according to the UI of your app.
 
 Here's how an example of to fetch reactions with pagination:
 
@@ -203,30 +203,30 @@ channelClient.getReactions(
 The <code>getReactions()</code> method takes in three parameters:
 
 - <code>messageId</code> - ID of the message whose reactions you want to fetch.
-- <code>offset</code>- The position at which you want to start fetching your reactions. Tis is useful when at times you want to fetch from let's say the 10th reaction. You set the offset to be 10. For this case it's 0 since you want to fetch from the first.
+- <code>offset</code>- The position at which you want to start fetching your reactions. This is useful when at times you want to fetch from let's say the 10th reaction. You set the offset to be 10. For this case, it's 0 since you want to fetch from the first.
 - <code>limit</code>- This specifies the number of reactions you want to fetch at a single time. The number is as per your needs.
 
 From the sample project, here's how the reactions are:
 
 ![Paginated Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/paginated_reactions.png)
 
-The API offers alot of flebility according to your needs. In the next section you'll be looking and the reactions from the API itself and how you can customize them.
+The API offers a lot of flexibility according to your needs. In the next section you'll be looking and the reactions from the API itself and how you can customize them.
 
 ## Looking at Stream Reactions
 
-The Reactions API has the UI components for reactions already built for you incase you don't need custom ones as you've been learning in the sections above. This is how they look:
+The Reactions API has the UI components for reactions already built for you in case you don't need custom ones as you've been learning in the sections above. This is how they look:
 
 ![Inbuilt Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/inbuilt_reactions.png)
 
-The UI offers a couple of commons reactions like the like love, thumbs up and so on which makes it easier if you want to quickly adopt them and use them in your app.
+The UI offers a couple of commons reactions for example like love, thumbs up and so on which makes it easier if you want to quickly adopt them and use them in your app.
 
-However, at times the requirement for your app can be different. Can I remove the default reactions? Can I add custom reactions? Can I be able to apply my own app style to the reactions? Are some of the questions you might ask yourself.
+However, at times the requirement for your app can be different. Can I remove the default reactions? Can I add custom reactions? Can I be able to apply my app style to the reactions? Are some of the questions you might ask yourself.
 
-And the good news is....drum rolls :-) Yes you can be able to do all that. From version **4.9** of the SDK you can be able to customize all this. You'll be learning how to customize next.
+And the good news is....drum rolls :-) Yes, you can be able to do all that. From version **4.9** of the SDK, you can be able to customize all this. You'll be learning how to customize next.
 
 ## Customizing the Reactions UI
 
-In order for you to customize the Reactions, you'll be using the <code>SupportedReactions</code> which allows you to define reactions. It accepts two parameters on it's constructor:
+For you to customize the Reactions, you'll be using the <code>SupportedReactions</code> which allows you to define reactions. It accepts two parameters on its constructor:
 
 - <code>context</code> - context of your class.
 - <code>reactions</code> - This is a Map of keys which hold the reaction type and a <code>ReactionDrawable</code>. This is the parameter you use to add your custom reactions. If you don't provide any reactions, by default it'll use the standard reactions.
@@ -247,7 +247,7 @@ fun clapDrawable(context: Context): SupportedReactions.ReactionDrawable {
 
 This is a normal function which has <code>context</code> as arguements and returns a <code>ReactionDrawable</code>. As you can see, here you set the <code>drawableInactive</code> and <code>drawableActive</code> icons. For the the active icon you're simply changing the color of the icon.
 
-In the sample project you can check on the <code>ReactionDrawables.kt</code> file which is under the **utils** package for more custom drawables.
+In the sample project you can check on the <code>ReactionDrawables.kt</code> file which is under the **utils** package for more custom drawable.
 
 Now, you drawables are ready to be used. Next is to create a map of reactions type and the drawables as follows:
 
@@ -273,9 +273,9 @@ Here you're passing your reactions to the SDK. And now this is how your reaction
 
 ![Custom Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/custom_reactions.png)
 
-Wohoo! As you can now see, all the reactions are custom ones and with different colors!. And as you've noted, it's very easy to achieve this is easy steps. 
+Woohoo! As you can now see, all the reactions are custom ones and with different colors!. And as you've noted, it's very easy to achieve this in easy steps. 
 
-In the next section, you'll see how to customize the colors of reaction card and the titles.
+In the next section, you'll see how to customize the colors of the reaction card and the titles.
 
 ## Adding your Custom Styling to Reactions
 
@@ -289,7 +289,7 @@ At times you need the UI for the reactions to adapt to the styling of your app. 
 <item name="streamUiUserReactionsBackgroundColor">@color/purple_200</item>
 ```
 
-From the above attributes you can see you can see you can be able to change:
+From the above attributes you can see you can be able to change:
 
 - Color
 - Text Size
@@ -297,7 +297,7 @@ From the above attributes you can see you can see you can be able to change:
 - Style
 - Card Background.
 
-This is how the final results looks like:
+This is how the final results look like:
 
 ![Custom Style Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions_custom_style.png)
 
@@ -305,11 +305,11 @@ Albeit yours will be different depending on your app colors and styling requirem
 
 ## Conclusion
 
-You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. In the process, you've also learned hpw you can create you own custom reactions and also how to customize reactions in the Stream SDK and also add your own custom reactions.
+You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. In the process, you've also learned how you can create your custom reactions and also how to customize reactions in the Stream SDK, and also add your custom reactions.
 
 You can get the full sample project with examples in this tutorial [here](https://github.com/wangerekaharun/StreamReactions).
 
-The Stream SDK also provides out of the box UI Features for reactions which you can explore also incase you need to quickly add reactions in your app without having to worry about the UI and UX part. 
+The Stream SDK also provides out-of-the-box UI Features for reactions which you can explore also in case you need to quickly add reactions in your app without having to worry about the UI and UX part. 
 
-Also as you've seen in this tutorial, it's easy to intergrate reactions to your existing app and use the Reactions API to enrich your app.
+Also as you've seen in this tutorial, it's easy to integrate reactions to your existing app and use the Reactions API to enrich your app.
 
