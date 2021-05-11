@@ -11,7 +11,13 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="streamUiUserReactionsTitleTextColor">@color/teal_200</item>
+
+        <!-- Custom Reactions theme. -->
+        <item name="streamUiUserReactionsTitleTextColor">@color/white</item>
+        <item name="streamUiUserReactionsTitleTextSize">18sp</item>
+        <item name="streamUiUserReactionsTitleTextFont">@font/benton_sans_book</item>
+        <item name="streamUiUserReactionsTitleTextStyle">italic</item>
+        <item name="streamUiUserReactionsBackgroundColor">@color/purple_200</item>
+
     </style>
 </resources>

@@ -38,6 +38,7 @@ class ChannelMessagesActivity : AppCompatActivity() {
             "brilliant" to brilliantDrawable(applicationContext),
             "handshake" to handShakeDrawable(applicationContext),
         )
+
         ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
 
     }

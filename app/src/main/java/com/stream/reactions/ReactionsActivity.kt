@@ -132,7 +132,6 @@ class ReactionsActivity : AppCompatActivity() {
                 binding.rvReactions.adapter = reactionsAdapter
             } else {
                 showSnackBar("Getting Reactions Failed: ${result.error().message}")
-                Log.d("error",result.error().message.toString())
             }
         }
     }

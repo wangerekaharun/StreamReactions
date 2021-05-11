@@ -153,17 +153,137 @@ The code is similar to the one for adding a like reaction that you saw above.
 
 ## Paginating Reactions
 
+On Social apps, a message or a post can get more that 10 reactions and even at times thousands of reactions. In such cases you can not display all these reactions in your app. Reactions API allows you to paginate reactions as you fetch them. In this way, you specify the number that you want to fetch according to the UI of your app.
+
+Here's how an example of to fetch reactions with pagination:
+
+```kotlin
+channelClient.getReactions(
+    messageId = messageId,
+    offset = 0,
+    limit = 10,
+).enqueue { result ->
+    if (result.isSuccess) {
+        val reactions: List<Reaction> = result.data()
+        binding.rvReactions.visibility = View.VISIBLE
+        reactionsAdapter.submitList(reactions)
+        binding.rvReactions.adapter = reactionsAdapter
+    } else {
+        showSnackBar("Getting Reactions Failed: ${result.error().message}")
+    }
+}
+```
+
+The <code>getReactions()</code> method takes in three parameters:
+
+- <code>messageId</code> - ID of the message whose reactions you want to fetch.
+- <code>offset</code>- The position at which you want to start fetching your reactions. Tis is useful when at times you want to fetch from let's say the 10th reaction. You set the offset to be 10. For this case it's 0 since you want to fetch from the first.
+- <code>limit</code>- This specifies the number of reactions you want to fetch at a single time. The number is as per your needs.
+
+From the sample project, here's how the reactions are:
+
+![paginated_reactions](/Users/harun/AndroidStudioProjects/StreamReactions/images/paginated_reactions.png)
+
+
+
+The API offers alot of flebility according to your needs. In the next section you'll be looking and the reactions from the API itself and how you can customize them.
+
+## Looking at Stream Reactions
+
+The Reactions API has the UI components for reactions already built for you incase you don't need custom ones as you've been learning in the sections above. This is how they look:
+
+<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/inbuilt_reactions.png" alt="inbuilt_reactions" style="zoom:50%;" />
+
+The UI offers a couple of commons reactions like the like love, thumbs up and so on which makes it easier if you want to quickly adopt them and use them in your app.
+
+However, at times the requirement for your app can be different. Can I remove the default reactions? Can I add custom reactions? Can I be able to apply my own app style to the reactions? Are some of the questions you might ask yourself.
+
+And the good news is....drum rolls :-) Yes you can be able to do all that. From version **4.9** of the SDK you can be able to customize all this. You'll be learning how to customize next.
+
 ## Customizing the Reactions UI
+
+In order for you to customize the Reactions, you'll be using the <code>SupportedReactions</code> which allows you to define reactions. It accepts two parameters on it's constructor:
+
+- <code>context</code> - context of your class.
+- <code>reactions</code> - This is a Map of keys which hold the reaction type and a <code>ReactionDrawable</code>. This is the parameter you use to add your custom reactions. If you don't provide any reactions, by default it'll use the standard reactions.
+
+A <code>ReactionDrawable</code>is an object that has the reaction icon and also handles the states for the different colors for example the active and inactive state.
+
+To define your own custom reaction, first create a custom <code>ReactionDrawable</code> as follows:
+
+```kotlin
+fun clapDrawable(context: Context): SupportedReactions.ReactionDrawable {
+    val drawableInactive = ContextCompat.getDrawable(context, R.drawable.ic_clapping)!!
+    val drawableActive = ContextCompat.getDrawable(context, R.drawable.ic_clapping)!!.apply {
+        setTint(ContextCompat.getColor(context,android.R.color.holo_red_dark ))
+    }
+    return SupportedReactions.ReactionDrawable(drawableInactive, drawableActive)
+}
+```
+
+This is a normal function which has <code>context</code> as arguements and returns a <code>ReactionDrawable</code>. As you can see, here you set the <code>drawableInactive</code> and <code>drawableActive</code> icons. For the the active icon you're simply changing the color of the icon.
+
+In the sample project you can check on the <code>ReactionDrawables.kt</code> file which is under the **utils** package for more custom drawables.
+
+Now, you drawables are ready to be used. Next is to create a map of reactions type and the drawables as follows:
+
+```Kotlin
+val reactions: Map<String, SupportedReactions.ReactionDrawable> = mapOf(
+    "like" to likeDrawable(applicationContext),
+    "clap" to clapDrawable(applicationContext),
+    "wondering" to wonderingDrawable(applicationContext),
+    "brilliant" to brilliantDrawable(applicationContext),
+    "handshake" to handShakeDrawable(applicationContext),
+)
+```
+
+Here you have all your custom reactions and their icons. This is all you need. After defining this, the final thing to do is to make sure your app uses the custom reactions that you've created.
+
+You do this by adding this:
+
+```kotlin
+ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
+```
+
+Here you're passing your reactions to the SDK. And now this is how your reactions look like:
+
+<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/custom_reactions.png" alt="custom_reactions" style="zoom:50%;" />
+
+Wohoo! As you can now see, all the reactions are custom ones and with different colors!. And as you've noted, it's very easy to achieve this is easy steps. 
+
+In the next section, you'll see how to customize the colors of reaction card and the titles.
 
 ## Adding your Custom Styling to Reactions
 
+At times you need the UI for the reactions to adapt to the styling of your app. The Reactions API also supprts this in very simple and straight forwad steps. For the title text you simply add the following in your <code>themes.xml</code> file:
 
+```xml
+<item name="streamUiUserReactionsTitleTextColor">@color/white</item>
+<item name="streamUiUserReactionsTitleTextSize">18sp</item>
+<item name="streamUiUserReactionsTitleTextFont">@font/benton_sans_book</item>
+<item name="streamUiUserReactionsTitleTextStyle">italic</item>
+<item name="streamUiUserReactionsBackgroundColor">@color/purple_200</item>
+```
 
+From the above attributes you can see you can see you can be able to change:
 
+- Color
+- Text Size
+- Font
+- Style
+- Card Background.
+
+This is how th final results looks like:
+
+<img src="/Users/harun/AndroidStudioProjects/StreamReactions/images/reactions_custom_style.png" alt="reactions_custom_style" style="zoom:50%;" />
+
+Albeit yours will be different depending on your app colors and styling requirements.
 
 ## Conclusion
 
-You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. 
+You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. In the process, you've also learned hpw you can create you own custom reactions and also how to customize reactions in the Stream SDK and also add your own custom reactions.
+
+You can get the full sample project with examples in this tutorial [here](https://github.com/wangerekaharun/StreamReactions).
 
 The Stream SDK also provides out of the box UI Features for reactions which you can explore also incase you need to quickly add reactions in your app without having to worry about the UI and UX part. 
 
