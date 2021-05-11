@@ -21,7 +21,7 @@ In this tutorial you're going to learn how to:
 
 ## Adding a Reaction
 
-![reactions](/Users/harun/AndroidStudioProjects/StreamReactions/images/reactions.png)
+![Test Image](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions.png)
 
 Reactions are mostly found on most social media apps and there's a number of them which are famously known:
 
