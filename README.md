@@ -6,7 +6,7 @@
 
 Modern chat apps need something to make the messaging platform lively and increase user engagement. Reactions have emerged as a top feature to help in this.
 
-Stream provides a nice SDK for you to add reactions in a matter of minutes in your application. 
+Stream provides a nice Android SDK for you to add reactions in a matter of minutes in your application. 
 
 In this tutorial you're going to learn how to:
 
@@ -125,7 +125,7 @@ Here, you send your reaction object to Stream Client. You're also handling the s
 
   
 
-Congratulations! You've learned how to add your first message reaction. With the Stream SDK, it's a very easy and seamless way to do that. Next, you'll be seeing how to remove the reaction.
+Congratulations! You've learned how to add your first message reaction. With the Stream's Android SDK, it's a very easy and seamless way to do that. Next, you'll be seeing how to remove the reaction.
 
 ## Removing a Reaction
 
@@ -148,7 +148,7 @@ This method is like the one for adding reactions. The difference is that you're 
 
 ## Cumulative Reactions
 
-Another famous reaction is the clap reaction or enabling a user to react more than once. This is useful in blogs and articles. The Reactions API allows this functionality out of the box. You do this is by adding the <code>score</code> in your reaction model as shown below:
+Another famous reaction is the clap reaction or enabling a user to react more than once. This is useful in blogs and articles. The Stream's Android SDK allows this functionality out of the box. You do this is by adding the <code>score</code> in your reaction model as shown below:
 
 ```Kotlin
 val reaction = Reaction(
@@ -176,7 +176,7 @@ channelClient.sendReaction(reaction).enqueue { result ->
 
 ## Paginating Reactions
 
-On Social apps, a message or a post can get more than 10 reactions and even at times thousands of reactions. In such cases, you can not display all these reactions in your app. Reactions API allows you to paginate reactions as you fetch them. In this way, you specify the number that you want to fetch according to the UI of your app.
+On Social apps, a message or a post can get more than 10 reactions and even at times thousands of reactions. In such cases, you can not display all these reactions in your app. Stream's Android SDK allows you to paginate reactions as you fetch them. In this way, you specify the number that you want to fetch according to the UI of your app.
 
 Here's how an example of to fetch reactions with pagination:
 
@@ -211,7 +211,7 @@ The API offers a lot of flexibility according to your needs. In the next section
 
 ## Looking at Stream Reactions
 
-The Reactions API has UI components for reactions built-in. They're useful in case you don't need custom ones as you've been learning in the sections above. This is how they look:
+The Stream's Android SDK has UI components for reactions built-in. They're useful in case you don't need custom ones as you've been learning in the sections above. This is how they look:
 
 ![Inbuilt Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/inbuilt_reactions.png)
 
@@ -219,7 +219,7 @@ The UI offers a couple of commons reactions for example love, like, thumbs. This
 
 However, at times the requirement for your app can be different. Can I remove the default reactions? Can I add custom reactions? Can I be able to apply my app style to the reactions? Are some of the questions you might ask yourself.
 
-And the good news is....drum rolls :-) Yes, you can be able to do all that. From version **4.9** of the SDK, you can be able to customize all this. You'll be learning how to customize next.
+And the good news is....drum rolls :-) Yes, you can be able to do all that. From version **4.9** of the Stream's Android SDK, you can be able to customize all this. You'll be learning how to customize next.
 
 ## Customizing the Reactions UI
 
@@ -266,7 +266,7 @@ You do this by adding this:
 ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
 ```
 
-Here you're passing your reactions to the SDK. And now this is how your reactions look like:
+Here you're passing your reactions to the Stream's Android SDK. And now this is how your reactions look like:
 
 ![Custom Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/custom_reactions.png)
 
@@ -276,7 +276,7 @@ In the next section, you'll see how to customize the colors of the reaction card
 
 ## Adding your Custom Styling to Reactions
 
-At times you need the UI for the reactions to adapt to the styling of your app. The Reactions API also supports this in very simple and straight forwad steps. For the title text you add the following in your <code>themes.xml</code> file:
+At times you need the UI for the reactions to adapt to the styling of your app. The Stream's Android SDK also supports this in a simple and straight forwad way. For the title text you add the following in your <code>themes.xml</code> file:
 
 ```xml
 <item name="streamUiUserReactionsTitleTextColor">@color/white</item>
