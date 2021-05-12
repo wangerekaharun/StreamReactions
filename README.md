@@ -37,7 +37,7 @@ You'll be seeing how to add a reaction. This is how the app looks like:
 ![](https://github.com/wangerekaharun/StreamReactions/blob/master/images/first_run.png)
 
 
-The app has a <code>TextView</code> which has a "Sample message text". It has a favourite <code>ImageButton<> beside it and a <code>VIEW CHANNEL</code> Button.  You'll see the channel functionalities later on in this tutorial.
+The app has a <code>TextView</code> which has a **Sample message text**. It has a favourite <code>ImageButton</code>> beside it and a <code>VIEW CHANNEL</code> Button.  You'll see the channel functionalities later on in this tutorial.
 
 Tap on the favourite <code>ImageButton</code>. The following <code>BottomSheet</code> modal will appear:
 
