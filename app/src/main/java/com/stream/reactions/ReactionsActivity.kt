@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 GradleBuildPlugins
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.stream.reactions
 
 import android.content.Intent
@@ -6,8 +21,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import com.stream.reactions.databinding.ActivityReactionsBinding
 import io.getstream.chat.android.client.ChatClient
@@ -15,7 +28,6 @@ import io.getstream.chat.android.client.api.models.QueryChannelsRequest
 import io.getstream.chat.android.client.api.models.QuerySort
 import io.getstream.chat.android.client.channel.ChannelClient
 import io.getstream.chat.android.client.models.*
-import io.getstream.chat.android.core.internal.exhaustive
 import io.getstream.chat.android.livedata.ChatDomain
 
 class ReactionsActivity : AppCompatActivity() {
@@ -61,35 +73,34 @@ class ReactionsActivity : AppCompatActivity() {
             if (result.isSuccess) {
                 val newChannel: Channel = result.data()
                 channelId = newChannel.cid
-                Log.d("Channel",newChannel.name)
+                Log.d("Channel", newChannel.name)
             } else {
                 showSnackBar("Adding channels Failed")
             }
         }
 
         val request = QueryChannelsRequest(
-                filter = Filters.and(
-                        Filters.eq("members", listOf("tutorial-droid")),
-                ),
-                offset = 0,
-                limit = 10,
-                querySort = QuerySort.desc("last_message_at")
+            filter = Filters.and(
+                Filters.eq("members", listOf("tutorial-droid")),
+            ),
+            offset = 0,
+            limit = 10,
+            querySort = QuerySort.desc("last_message_at")
         ).apply {
             watch = true
             state = true
         }
 
-
         client.queryChannels(request).enqueue { result ->
             if (result.isSuccess) {
                 val channels: List<Channel> = result.data()
-                Log.d("Channel",channels.toString())
+                Log.d("Channel", channels.toString())
             } else {
                 showSnackBar("Querying channel Failed")
             }
         }
 
-        val message = Message( text = "Sample message text" )
+        val message = Message(text = "Sample message text")
 
         channelClient.sendMessage(message).enqueue { result ->
             if (result.isSuccess) {
@@ -100,23 +111,22 @@ class ReactionsActivity : AppCompatActivity() {
             }
         }
 
-        reactionViewModel.messageId.observe(this){ messagId ->
-            if (messagId != null){
+        reactionViewModel.messageId.observe(this) { messagId ->
+            if (messagId != null) {
                 getReactions(messagId)
             }
         }
 
         binding.btnChannelMessages.setOnClickListener {
             val intent = Intent(this, ChannelMessagesActivity::class.java)
-            intent.putExtra("channelId",channelId)
+            intent.putExtra("channelId", channelId)
             startActivity(intent)
         }
     }
 
-
     private fun showReactions() {
         val modalbottomSheetFragment = ReactionsBottomSheet(channelClient, sentMessage)
-        modalbottomSheetFragment.show(supportFragmentManager,modalbottomSheetFragment.tag)
+        modalbottomSheetFragment.show(supportFragmentManager, modalbottomSheetFragment.tag)
     }
 
     private fun getReactions(messageId: String) {
@@ -136,22 +146,20 @@ class ReactionsActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteReaction(reaction: Reaction){
+    private fun deleteReaction(reaction: Reaction) {
         channelClient.deleteReaction(
             messageId = reaction.messageId,
             reactionType = reaction.type,
         ).enqueue { result ->
             if (result.isSuccess) {
-                Log.d("Reaction Deleted","Reaction ${reaction.type} has been deleted")
+                Log.d("Reaction Deleted", "Reaction ${reaction.type} has been deleted")
             } else {
                 showSnackBar("Delete Failed")
             }
         }
-
     }
 
-
-    private fun showSnackBar(message: String){
+    private fun showSnackBar(message: String) {
         Snackbar.make(
             findViewById(android.R.id.content),
             message,

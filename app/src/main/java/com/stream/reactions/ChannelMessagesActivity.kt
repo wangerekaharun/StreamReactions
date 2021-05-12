@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 GradleBuildPlugins
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.stream.reactions
 
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +40,7 @@ class ChannelMessagesActivity : AppCompatActivity() {
             "Specifying a channel id is required when starting ChannelActivity"
         }
 
-        Log.d("channelId",channelId)
+        Log.d("channelId", channelId)
 
         val factory = MessageListViewModelFactory(channelId)
         val messageListViewModel: MessageListViewModel by viewModels() { factory }
@@ -40,6 +55,5 @@ class ChannelMessagesActivity : AppCompatActivity() {
         )
 
         ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
-
     }
 }

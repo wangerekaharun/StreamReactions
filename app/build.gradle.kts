@@ -41,8 +41,8 @@ android {
     }
 
     val TOKEN: String? =
-            com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)
-                    .getProperty("TOKEN")
+        com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(rootDir)
+            .getProperty("TOKEN")
 
     buildTypes {
         this.forEach {
@@ -63,10 +63,10 @@ android {
         implementation(Libraries.constraintLayout)
         implementation(Libraries.materialComponents)
 
-        //Stream
+        // Stream
         implementation(Libraries.stream)
 
-        //Fragment
+        // Fragment
         implementation(Libraries.fragment)
 
         androidTestImplementation(TestLibraries.testRunner)
