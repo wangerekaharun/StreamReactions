@@ -4,7 +4,7 @@
 
 ## Introduction
 
-In modern chat apps, you need something to make the messaging platforms a bit lively and increase user engagement. Reactions have emerged as a top feature to help in this.
+Modern chat apps need something to make the messaging platform lively and increase user engagement. Reactions have emerged as a top feature to help in this.
 
 Stream provides a nice SDK for you to add reactions in a matter of minutes in your application. 
 
@@ -17,33 +17,33 @@ In this tutorial you're going to learn how to:
 - Adding Custom Reactions
 - Styling Reactions
 
-**Note:** This tutorial assumes you already know the basic knowledge on the Stream API's. To quickly get started checkout the [Android Chat Messaging Tutorial](https://getstream.io/tutorials/android-chat/#kotlin)
+**Note:** This tutorial assumes you already know the basic knowledge on the Stream API's. To get started checkout the [Android Chat Messaging Tutorial](https://getstream.io/tutorials/android-chat/#kotlin)
 
 ## Adding a Reaction
 
 ![Stream Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions.png)
 
-Reactions are mostly found on most social media apps and there's a number of them that are famously known:
+Reactions are on most social media apps and there's many of them for example:
 
 - Like
 - Favourite/Love
 - Sad/Angry
 - Clap
 
-They're mostly used to represent common quick reactions that users can have after seeing a post.  Using the Stream SDK, you can easily add reactions to your messages in a very easy way.
+They're used to represent common quick reactions that users can have after seeing a post.  Using the Stream SDK, you can add reactions to your messages in a very easy way.
 
 You'll be seeing how to add a reaction. This is how the app looks like:
 
 ![](https://github.com/wangerekaharun/StreamReactions/blob/master/images/first_run.png)
 
 
-The app has a sample message <code>TextView</code> which has a favourite <code>ImageButton</code> just beside it and a <code>VIEW CHANNEL</code> Button.  You'll see the channel functionalities later on in this tutorial.
+The app has a <code>TextView</code> which has a "Sample message text". It has a favourite <code>ImageButton<> beside it and a <code>VIEW CHANNEL</code> Button.  You'll see the channel functionalities later on in this tutorial.
 
-When you tap on the favourite <code>ImageButton</code> a <code>BottomSheet</code> modal appears as show in the image below:
+Tap on the favourite <code>ImageButton</code>. The following <code>BottomSheet</code> modal will appear:
 
 ![Add Reaction](https://github.com/wangerekaharun/StreamReactions/blob/master/images/add_reaction.png)
 
-This is the UI for adding your reaction. With buttons for selecting the reaction type and other buttons for adding the score for your reaction. Once you set everything it should be as follows:
+This is the UI for adding your reaction. It has buttons for selecting the reaction type. There are other buttons for adding or reducing the score for your reaction. Once you set everything it should be as follows:
 
 ![Reactions Input](https://github.com/wangerekaharun/StreamReactions/blob/master/images/reactions_input.png)
 
@@ -65,9 +65,9 @@ In the code above:
 - You're adding the <code>messageId</code> for the message that you want to react to.
 - You specify the type of the reaction. The type is from the one you selected on the app.
 - Here, you're also adding the score for the reaction. The value for the score is the one you set.
-- Lastly, you add any additional extra information.
+- Lastly, you add any extra information.
 
-Now, you have your reaction object ready, next you'll be seeing how to send that reaction over to the Stream Client.
+You have your reaction object ready. Next, you'll be seeing how to send that reaction over to the Stream Client.
 
 To send a message reaction, you need a <code>ChannelClient</code>. A <code>ChannelClient</code> enables you to:
 
@@ -76,7 +76,7 @@ To send a message reaction, you need a <code>ChannelClient</code>. A <code>Chann
 - Add messages to channels
 - React to messages in channels.
 
-On the sample app, the client is declared at the top of the file as:
+On the sample app, you declare the client at the top of the file as:
 
 ```Kotlin
 private lateinit var channelClient: ChannelClient
@@ -87,8 +87,7 @@ It's initialised in your <code>onCreate</code> method as follows:
 ```kotlin
 channelClient = client.channel(channelType = "messaging", channelId = "general")
 ```
-
-It needs a <code>ChatClient</code> which is responsible for initializing the Stream Chat Client in your application. Since the logic to save a reaction is on the <code>ReactionsBottomSheet</code> you'll have to pass the <code>sentMesage</code> and <code>channelCient</code> to the class as shown below:
+The logic to save a reaction is on the <code>ReactionsBottomSheet</code> . You'll need to pass the <code>sentMesage</code> and <code>channelCient</code> to the class as shown below:
 
 ```Kotlin
 val modalbottomSheetFragment = ReactionsBottomSheet(channelClient, sentMessage)
@@ -110,9 +109,9 @@ channelClient.sendReaction(reaction).enqueue { result ->
         }
 ```
 
-Here, you send your reaction object to Stream Client and wait for the callback response which returns a success or a failure. Depending on the result, you handle the states according to your app's needs. In this scenario you:
+Here, you send your reaction object to Stream Client. You're also handling the success and failure states from the callback response. Depending on the result, you handle the states according to your app's needs. In this scenario you:
 
-- Call the <code>setMessageId()</code> method in the ViewModel and pass the id of the reaction which has been saved so that it can be observed on your activity.
+- Call the <code>setMessageId()</code> method in the ViewModel. You pass the id of the reaction which has been saved so that you observe it on your activity.
 
 - Show a <code>Toast</code> when saving the reactions fails. 
 
@@ -126,7 +125,7 @@ Here, you send your reaction object to Stream Client and wait for the callback r
 
   
 
-Congratulations! You've just learned how to add your first message reaction. With the Stream SDK, it's a very easy and seamless way to do that. Next, you'll be seeing how to remove the reaction.
+Congratulations! You've learned how to add your first message reaction. With the Stream SDK, it's a very easy and seamless way to do that. Next, you'll be seeing how to remove the reaction.
 
 ## Removing a Reaction
 
@@ -145,11 +144,11 @@ To remove a reaction, you only need the <code>messageId</code> and <code>reactio
         }
 ```
 
-This method is similar to the one for adding reactions only difference is that you're calling the <code>deleteReaction</code> method to delete the reaction. You're also passing the <code>messageId</code> and <code>reactionType</code> for the reaction that you want to remove. You're also handling the success and error states.
+This method is like the one for adding reactions. The difference is that you're calling the <code>deleteReaction</code> method to delete the reaction. You're also passing the <code>messageId</code> and <code>reactionType</code> for the reaction that you want to remove. You're also handling the success and error states.
 
 ## Cumulative Reactions
 
-Another famous reaction is the clap reaction or enabling a user to react more than once. This is mostly useful in blogs and articles. The Reactions API allows this functionality out of the box. This is supported by adding the <code>score</code> in your reaction model as shown below:
+Another famous reaction is the clap reaction or enabling a user to react more than once. This is useful in blogs and articles. The Reactions API allows this functionality out of the box. You do this is by adding the <code>score</code> in your reaction model as shown below:
 
 ```Kotlin
 val reaction = Reaction(
@@ -174,8 +173,6 @@ channelClient.sendReaction(reaction).enqueue { result ->
             }
         }
 ```
-
-The code is similar to the one for adding a  reaction that you saw above.
 
 ## Paginating Reactions
 
@@ -214,11 +211,11 @@ The API offers a lot of flexibility according to your needs. In the next section
 
 ## Looking at Stream Reactions
 
-The Reactions API has the UI components for reactions already built for you in case you don't need custom ones as you've been learning in the sections above. This is how they look:
+The Reactions API has UI components for reactions built-in. They're useful in case you don't need custom ones as you've been learning in the sections above. This is how they look:
 
 ![Inbuilt Reactions](https://github.com/wangerekaharun/StreamReactions/blob/master/images/inbuilt_reactions.png)
 
-The UI offers a couple of commons reactions for example like love, thumbs up and so on which makes it easier if you want to quickly adopt them and use them in your app.
+The UI offers a couple of commons reactions for example love, like, thumbs. This makes it easier if you want to adopt them and use them in your app.
 
 However, at times the requirement for your app can be different. Can I remove the default reactions? Can I add custom reactions? Can I be able to apply my app style to the reactions? Are some of the questions you might ask yourself.
 
@@ -226,14 +223,14 @@ And the good news is....drum rolls :-) Yes, you can be able to do all that. From
 
 ## Customizing the Reactions UI
 
-For you to customize the Reactions, you'll be using the <code>SupportedReactions</code> which allows you to define reactions. It accepts two parameters on its constructor:
+To customize the reactions, you'll be using the <code>SupportedReactions</code> . It allows you to define reactions. It accepts two parameters on its constructor:
 
 - <code>context</code> - context of your class.
 - <code>reactions</code> - This is a Map of keys which hold the reaction type and a <code>ReactionDrawable</code>. This is the parameter you use to add your custom reactions. If you don't provide any reactions, by default it'll use the standard reactions.
 
-A <code>ReactionDrawable</code>is an object that has the reaction icon and also handles the states for the different colors for example the active and inactive state.
+A <code>ReactionDrawable</code>is an object that has the reaction icon. It handles the states for the icon for example the active and inactive states.
 
-To define your own custom reaction, first create a custom <code>ReactionDrawable</code> as follows:
+To define your own custom reaction, create a custom <code>ReactionDrawable</code> as follows:
 
 ```kotlin
 fun clapDrawable(context: Context): SupportedReactions.ReactionDrawable {
@@ -245,11 +242,11 @@ fun clapDrawable(context: Context): SupportedReactions.ReactionDrawable {
 }
 ```
 
-This is a normal function which has <code>context</code> as arguements and returns a <code>ReactionDrawable</code>. As you can see, here you set the <code>drawableInactive</code> and <code>drawableActive</code> icons. For the the active icon you're simply changing the color of the icon.
+This is a normal function which has <code>context</code> as arguments. It returns a <code>ReactionDrawable</code>. You also set the <code>drawableInactive</code> and <code>drawableActive</code> icons. For the the active icon you're changing the color of the icon.
 
-In the sample project you can check on the <code>ReactionDrawables.kt</code> file which is under the **utils** package for more custom drawable.
+In the sample project you can check on the <code>ReactionDrawables.kt</code> file. It is under the **utils** package for more custom drawable.
 
-Now, you drawables are ready to be used. Next is to create a map of reactions type and the drawables as follows:
+Now, you have the drawables ready for use. Next is to create a map of reactions type and the drawables as follows:
 
 ```Kotlin
 val reactions: Map<String, SupportedReactions.ReactionDrawable> = mapOf(
@@ -265,7 +262,7 @@ Here you have all your custom reactions and their icons. This is all you need. A
 
 You do this by adding this:
 
-```kotlin
+```Kotlin
 ChatUI.supportedReactions = SupportedReactions(applicationContext, reactions)
 ```
 
@@ -279,7 +276,7 @@ In the next section, you'll see how to customize the colors of the reaction card
 
 ## Adding your Custom Styling to Reactions
 
-At times you need the UI for the reactions to adapt to the styling of your app. The Reactions API also supprts this in very simple and straight forwad steps. For the title text you simply add the following in your <code>themes.xml</code> file:
+At times you need the UI for the reactions to adapt to the styling of your app. The Reactions API also supports this in very simple and straight forwad steps. For the title text you add the following in your <code>themes.xml</code> file:
 
 ```xml
 <item name="streamUiUserReactionsTitleTextColor">@color/white</item>
@@ -305,11 +302,7 @@ Albeit yours will be different depending on your app colors and styling requirem
 
 ## Conclusion
 
-You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. In the process, you've also learned how you can create your custom reactions and also how to customize reactions in the Stream SDK, and also add your custom reactions.
+You've learned how to add, remove, paginate and add cumulative reactions in this tutorial. In the process, you've also learned how you can create your custom reactions. You've also seen how to customize reactions in the Stream SDK, and also add your custom reactions.
 
 You can get the full sample project with examples in this tutorial [here](https://github.com/wangerekaharun/StreamReactions).
-
-The Stream SDK also provides out-of-the-box UI Features for reactions which you can explore also in case you need to quickly add reactions in your app without having to worry about the UI and UX part. 
-
-Also as you've seen in this tutorial, it's easy to integrate reactions to your existing app and use the Reactions API to enrich your app.
 
